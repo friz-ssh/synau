@@ -7,7 +7,7 @@ class Guru {
     private:
         string nip;
         bool validasiNIP(const string& input) {
-            // cek apakah panjang NIP 18 karakter
+            // cek apakah panjang NIP 18 karakter (ini format diambil dari format NIP UGM )
             if (input.length() != 18) { return false; }
             for (char c: input) {
                 if (!isdigit(c)) { return false;}
@@ -18,14 +18,15 @@ class Guru {
         string nama;
     public:
         string namaSekolah;
-        void tampilkanProfil() {
+        void tampilkanProfil() const {
             cout << "Profil Guru: \n";
             cout << "Nama Guru: " << nama << "\n";
             cout << "NIP: " << nip << "\n";
             cout << "Nama Sekolah: " << namaSekolah << "\n";
         }
         Guru() {} // default constructor
-        Guru(const string& na, const string& ni, const string& ns): nama(na), namaSekolah(ns) {
+
+        Guru(const string& ni, const string& na, const string& ns): nama(na), namaSekolah(ns) {
             if(validasiNIP(ni)) {
                 nip = ni;
             } else {
@@ -38,13 +39,13 @@ class Guru {
 
 int main(){
     // guru dengan NIP valid
-    Guru guru1("Nate Tan Ahoe", "196706072002121067", "SMA Indonesia Emas 2045");
+    Guru guru1("196706072002121067", "Nate Tan Ahoe", "SMA Indonesia Emas 2045");
     guru1.tampilkanProfil();
 
     cout << "\n";
 
     // guru dengan NIP tidak valid
-    Guru guru2("Bayn Jamien", "0000000", "SMA Indonesia Emas 2045");
+    Guru guru2("0000000", "Bayn Jamien", "SMA Indonesia Emas 2045");
     guru2.tampilkanProfil();
     return 0;
 }
